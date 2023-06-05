@@ -36,7 +36,17 @@ html {
 }
 html,
 body {
-  background: rgb(13, 6, 71);
+  background: #1e3c72; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2a5298,
+    #1e3c72
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2a5298,
+    #1e3c72
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 html {
   /*font-size: 16px;  по умолчанию */
@@ -87,17 +97,54 @@ html {
     gap: 15px;
   }
 }
+.info_i_am__title span {
+  display: inline-block;
+  text-shadow: 0 0 0 whitesmoke;
+  animation: smoky 10s 1s both;
+}
+
+span:nth-child(even) {
+  animation-name: smoky-mirror;
+}
+
+@keyframes smoky {
+  60% {
+    text-shadow: 0 0 40px whitesmoke;
+  }
+  to {
+    transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg)
+      scale(1.5);
+    text-shadow: 0 0 20px whitesmoke;
+    opacity: 0;
+  }
+}
+
+@keyframes smoky-mirror {
+  60% {
+    text-shadow: 0 0 40px whitesmoke;
+  }
+  to {
+    transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg)
+      scale(2);
+    text-shadow: 0 0 20px whitesmoke;
+    opacity: 0;
+  }
+}
+
+@for $item from 1 through 21 {
+  span:nth-of-type(#{$item}) {
+    animation-delay: #{(3 + ($item/10))}s;
+  }
+}
 
 /* Header */
 
-.header:hover {
-  border: 1px solid rgb(234, 206, 27);
-}
 .header__container {
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: 50px;
 }
 .logo a {
   font-family: "Montserrat";
@@ -155,8 +202,8 @@ html {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 800;
-  font-size: 32px;
-  line-height: 2.4;
+  font-size: 30px;
+  line-height: 2;
   text-transform: uppercase;
   color: #d9d9d9;
 }
@@ -260,7 +307,10 @@ html {
 .skills__container {
   display: flex;
   flex-direction: column;
-  background: #eaded4;
+  background: #f3904f;
+  background: -webkit-linear-gradient(to right, #3b4371, #f3904f);
+  background: linear-gradient(to right, #3b4371, #f3904f);
+
   align-items: center;
 }
 .skills__title {
@@ -279,7 +329,9 @@ html {
   gap: 20px;
   justify-content: center;
 }
-.items-skills__item {
+.items-skills__item_html,
+.items-skills__item_css,
+.items-skills__item_js {
   width: 200px;
   height: 200px;
   display: flex;
@@ -293,11 +345,25 @@ html {
   line-height: 1.2;
   text-transform: uppercase;
   color: #ffffff;
+  transition: all 0.5s ease 0s;
 }
-.items-skills__item:hover {
-  box-shadow: 0px -10px 50px rgb(235, 252, 2);
-  color: rgb(235, 252, 2);
+.items-skills__item_html:hover {
+  box-shadow: 0px -10px 50px #f3904f;
+  color: #f3904f;
   font-size: 60px;
+  border-radius: 50%;
+}
+.items-skills__item_css:hover {
+  box-shadow: 0px -10px 50px #1873f1;
+  color: #1873f1;
+  font-size: 60px;
+  border-radius: 50%;
+}
+.items-skills__item_js:hover {
+  box-shadow: 0px -10px 50px #e9ed03;
+  color: #e9ed03;
+  font-size: 60px;
+  border-radius: 50%;
 }
 
 /* MyWorks */
@@ -310,7 +376,9 @@ html {
   margin-bottom: 25px;
 }
 .MyWorks__block {
-  background-color: #07203f;
+  background: #000428;
+  background: -webkit-linear-gradient(to right, #004e92, #000428);
+  background: linear-gradient(to right, #004e92, #000428);
   display: flex;
   max-width: 50%;
   padding: 50px;
@@ -323,9 +391,8 @@ html {
   transition: all 1.5s ease 0s;
 }
 .MyWorks__block:hover {
-  border: 5px solid rgb(235, 252, 2);
   border-radius: 20px;
-  box-shadow: 10px 5px 25px rgb(127, 128, 121);
+  box-shadow: 10px 0px 25px rgb(127, 128, 121);
 }
 .block__title {
   font-family: "Roboto";
@@ -333,14 +400,17 @@ html {
   font-size: 200%;
 }
 .description {
-  display: block;
+  font-family: "Roboto";
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 50px;
   max-width: 400px;
-  text-align: justify;
 }
 .block__picture,
 .block__picture-big {
   max-width: 100%;
-  border: 2px solid rgb(235, 252, 2);
+  border: 2px solid rgba(7, 7, 7, 0.089);
+  border-radius: 20px;
 }
 
 .block__picture:active {
